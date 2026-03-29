@@ -39,6 +39,16 @@ document.addEventListener('click', function startAudio() {
 
 const gallery = document.querySelector('.gallery');
 let zoomedImage = null;
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox-overlay';
+document.body.appendChild(lightbox);
+
+function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightbox.innerHTML = '';
+    zoomedImage = null;
+    document.body.style.overflow = '';
+}
 
 if (gallery) {
     gallery.addEventListener('click', (event) => {
@@ -47,20 +57,31 @@ if (gallery) {
 
         event.stopPropagation();
 
-        if (zoomedImage && zoomedImage !== img) {
-            zoomedImage.classList.remove('enlarged');
-            zoomedImage = null;
+        if (zoomedImage) {
+            closeLightbox();
         }
 
-        img.classList.toggle('enlarged');
-        zoomedImage = img.classList.contains('enlarged') ? img : null;
+        const clone = document.createElement('img');
+        clone.src = img.src;
+        clone.alt = img.alt || '';
+        lightbox.innerHTML = '';
+        lightbox.appendChild(clone);
+        lightbox.style.display = 'flex';
+        zoomedImage = img;
+
+        document.body.style.overflow = 'hidden';
+    });
+
+    lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox || event.target.tagName === 'IMG') {
+            closeLightbox();
+        }
     });
 
     document.addEventListener('click', (event) => {
         if (!zoomedImage) return;
-        if (event.target.closest('.photo-card img')) return;
+        if (event.target.closest('.photo-card img') || event.target.closest('#lightbox-overlay')) return;
 
-        zoomedImage.classList.remove('enlarged');
-        zoomedImage = null;
+        closeLightbox();
     });
 }
