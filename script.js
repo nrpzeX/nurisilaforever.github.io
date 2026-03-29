@@ -54,3 +54,14 @@ window.addEventListener('load', () => {
         updateAudioButton();
     });
 });
+
+document.addEventListener('click', function startAudio() {
+    if (audio && audio.paused) {
+        audio.play().then(() => {
+            updateAudioButton();
+        }).catch(() => {
+            // Çalma başarısız olursa hiçbir şey yapma
+        });
+    }
+    document.removeEventListener('click', startAudio);
+});
