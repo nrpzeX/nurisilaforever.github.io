@@ -44,16 +44,13 @@ audioToggle?.addEventListener('click', () => {
 window.addEventListener('load', () => {
     if (!audio) return;
 
-    audio.volume = 0.015; // %50 ses seviyesi
+    audio.volume = 0.5; // %50 ses seviyesi
     audio.muted = false;
 
     audio.play().then(() => {
         updateAudioButton();
     }).catch(() => {
-        // Otomatik oynatma engellendiyse önce sessize alıp tekrar dene.
-        audio.muted = true;
-        audio.play().catch(() => {
-            // Yine başarısızsa kullanıcı interaksiyonu bekle.
-        }).finally(updateAudioButton);
+        // Otomatik oynatma engellendiyse kullanıcı butona tıklayarak başlatabilir.
+        updateAudioButton();
     });
 });
