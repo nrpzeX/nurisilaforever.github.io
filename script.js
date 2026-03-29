@@ -16,7 +16,7 @@ const audio = document.getElementById('background-audio');
 window.addEventListener('load', () => {
     if (!audio) return;
 
-    audio.volume = 0.5; // %50 ses seviyesi
+    audio.volume = 0.020; // %50 ses seviyesi
     audio.muted = false;
 
     audio.play().then(() => {
