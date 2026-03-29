@@ -36,3 +36,31 @@ document.addEventListener('click', function startAudio() {
     }
     document.removeEventListener('click', startAudio);
 });
+
+const gallery = document.querySelector('.gallery');
+let zoomedImage = null;
+
+if (gallery) {
+    gallery.addEventListener('click', (event) => {
+        const img = event.target.closest('.photo-card img');
+        if (!img) return;
+
+        event.stopPropagation();
+
+        if (zoomedImage && zoomedImage !== img) {
+            zoomedImage.classList.remove('enlarged');
+            zoomedImage = null;
+        }
+
+        img.classList.toggle('enlarged');
+        zoomedImage = img.classList.contains('enlarged') ? img : null;
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!zoomedImage) return;
+        if (event.target.closest('.photo-card img')) return;
+
+        zoomedImage.classList.remove('enlarged');
+        zoomedImage = null;
+    });
+}
