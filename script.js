@@ -12,34 +12,6 @@ function createHeart() {
 setInterval(createHeart, 300);
 
 const audio = document.getElementById('background-audio');
-const audioToggle = document.getElementById('audio-toggle');
-
-function updateAudioButton() {
-    if (!audio || !audioToggle) return;
-    if (audio.paused || audio.muted) {
-        audioToggle.textContent = '🔇';
-    } else {
-        audioToggle.textContent = '🔊';
-    }
-}
-
-function toggleAudio() {
-    if (!audio) return;
-
-    if (audio.paused || audio.muted) {
-        audio.muted = false;
-        audio.play().catch(() => {
-            // Çalma engellenirse değişiklikleri gör.
-        }).finally(updateAudioButton);
-    } else {
-        audio.muted = true;
-        updateAudioButton();
-    }
-}
-
-audioToggle?.addEventListener('click', () => {
-    toggleAudio();
-});
 
 window.addEventListener('load', () => {
     if (!audio) return;
@@ -48,17 +20,16 @@ window.addEventListener('load', () => {
     audio.muted = false;
 
     audio.play().then(() => {
-        updateAudioButton();
+        // Müzik başladı
     }).catch(() => {
-        // Otomatik oynatma engellendiyse kullanıcı butona tıklayarak başlatabilir.
-        updateAudioButton();
+        // Otomatik oynatma engellendiyse kullanıcı tıklayarak başlatabilir.
     });
 });
 
 document.addEventListener('click', function startAudio() {
     if (audio && audio.paused) {
         audio.play().then(() => {
-            updateAudioButton();
+            // Müzik başladı
         }).catch(() => {
             // Çalma başarısız olursa hiçbir şey yapma
         });
