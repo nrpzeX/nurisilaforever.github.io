@@ -44,7 +44,7 @@ audioToggle?.addEventListener('click', () => {
 window.addEventListener('load', () => {
     if (!audio) return;
 
-    audio.volume = 0.015; // %10 ses seviyesi
+    audio.volume = 0.015; // %50 ses seviyesi
     audio.muted = false;
 
     audio.play().then(() => {
