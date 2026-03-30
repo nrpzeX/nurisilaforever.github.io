@@ -233,8 +233,16 @@ header h1 {
     }
 
     .photo-card img {
-        max-height: 320px;
-        object-fit: contain;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .vertical {
+        height: min(70vh, 520px);
+    }
+
+    .horizontal {
+        height: min(45vh, 360px);
     }
 
     .photo-caption {
