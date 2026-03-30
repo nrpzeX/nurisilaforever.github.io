@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kısa Bilgi - Sıla & Nuri</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <audio id="background-audio" loop preload="auto" autoplay>
+        <source src="song/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="audio-toggle" type="button" aria-label="Sesi aç/kapat">
+        🔊
+    </button>
+
+    <header>
+        <h1>💕 Kısa Bilgi 💕</h1>
+    </header>
+
+    <nav class="top-nav" aria-label="Site navigasyonu">
+        <div class="nav-inner">
+            <a href="index.html">Resimlerimiz</a>
+            <a href="kisa-bilgi.html" aria-current="page">Kısa Bilgi</a>
+            <a href="neredeydik.html">Neredeydik?</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="articles">
+            <div class="article">
+                <h3>Biz Kimiz?</h3>
+
+                <div class="story-editor">
+                    <textarea id="story-input" class="story-input" rows="7"
+                        placeholder="Buraya hikayenizi yazın..."></textarea>
+                    <div class="story-actions">
+                        <button id="story-save" class="story-save" type="button">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>

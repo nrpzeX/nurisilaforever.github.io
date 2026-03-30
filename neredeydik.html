@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neredeydik? - Sıla & Nuri</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+
+<body>
+    <audio id="background-audio" loop preload="auto" autoplay>
+        <source src="song/song.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="audio-toggle" type="button" aria-label="Sesi aç/kapat">
+        🔊
+    </button>
+
+    <header>
+        <h1>📍 Neredeydik?</h1>
+    </header>
+
+    <nav class="top-nav" aria-label="Site navigasyonu">
+        <div class="nav-inner">
+            <a href="index.html">Resimlerimiz</a>
+            <a href="kisa-bilgi.html">Kısa Bilgi</a>
+            <a href="neredeydik.html" aria-current="page">Neredeydik?</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="map-card" aria-label="Türkiye haritası">
+            <div id="map"></div>
+        </section>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+    <script src="leaflet-neredeydik.js"></script>
+</body>
+
+</html>

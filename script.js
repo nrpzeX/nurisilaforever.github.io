@@ -12,30 +12,67 @@ function createHeart() {
 setInterval(createHeart, 300);
 
 const audio = document.getElementById('background-audio');
+const audioToggleBtn = document.getElementById('audio-toggle');
+
+function setAudioToggleLabel() {
+    if (!audioToggleBtn || !audio) return;
+    audioToggleBtn.textContent = audio.muted ? '🔇' : '🔊';
+}
+
+async function tryPlayAudio({ allowMutedFallback = true } = {}) {
+    if (!audio) return false;
+
+    try {
+        await audio.play();
+        return true;
+    } catch (_) {
+        if (!allowMutedFallback) return false;
+
+        try {
+            audio.muted = true;
+            await audio.play();
+            return true;
+        } catch (_) {
+            return false;
+        }
+    } finally {
+        setAudioToggleLabel();
+    }
+}
 
 window.addEventListener('load', () => {
     if (!audio) return;
 
-    audio.volume = 0.020; // %50 ses seviyesi
+    audio.volume = 0.020;
     audio.muted = false;
+    setAudioToggleLabel();
 
-    audio.play().then(() => {
-        // Müzik başladı
-    }).catch(() => {
-        // Otomatik oynatma engellendiyse kullanıcı tıklayarak başlatabilir.
+    void tryPlayAudio({ allowMutedFallback: true });
+});
+
+function unlockAudio() {
+    if (!audio) return;
+    if (audio.muted) audio.muted = false;
+    void tryPlayAudio({ allowMutedFallback: false });
+    setAudioToggleLabel();
+}
+
+document.addEventListener('pointerdown', unlockAudio, { once: true, passive: true });
+document.addEventListener('keydown', unlockAudio, { once: true });
+
+if (audioToggleBtn) {
+    audioToggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!audio) return;
+
+        audio.muted = !audio.muted;
+        setAudioToggleLabel();
+
+        if (!audio.muted && audio.paused) {
+            void tryPlayAudio({ allowMutedFallback: false });
+        }
     });
-});
-
-document.addEventListener('click', function startAudio() {
-    if (audio && audio.paused) {
-        audio.play().then(() => {
-            // Müzik başladı
-        }).catch(() => {
-            // Çalma başarısız olursa hiçbir şey yapma
-        });
-    }
-    document.removeEventListener('click', startAudio);
-});
+}
 
 const gallery = document.querySelector('.gallery');
 let zoomedImage = null;
