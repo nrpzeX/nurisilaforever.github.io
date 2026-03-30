@@ -184,7 +184,15 @@ header h1 {
 
     .photo-card img {
         height: auto;
-        object-fit: contain;
+        object-fit: cover;
+    }
+
+    .vertical {
+        height: 300px;
+    }
+
+    .horizontal {
+        height: 200px;
     }
 
     .photo-caption {
